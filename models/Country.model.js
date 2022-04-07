@@ -1,5 +1,7 @@
 const { Schema, model } = require('mongoose')
+const Currency = require('./Currency.model')
 const { linkTo } = require('./helpers')
+const Language = require('./Language.model')
 const { nameSchema, imageSchema } = require('./schemas')
 
 const countrySchema = new Schema({
@@ -12,7 +14,7 @@ const countrySchema = new Schema({
   independent: Boolean,
   status: String,
   unMember: Boolean,
-  currencies: [linkTo('Currency')],
+  currencies: [linkTo(Currency)],
   idd: {
     root: String,
     suffixes: [String],
@@ -21,7 +23,7 @@ const countrySchema = new Schema({
   altSpellings: [String],
   region: String,
   subregion: String,
-  languages: [linkTo('Language')],
+  languages: [linkTo(Language)],
   latlng: [Number],
   landlocked: Boolean,
   borders: [String],
