@@ -1,4 +1,5 @@
 // For shared schemas or small subdocument schemas
+const { Schema } = require('mongoose')
 
 const nameSchema = new Schema({
   official: {

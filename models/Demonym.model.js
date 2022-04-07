@@ -3,12 +3,9 @@ const { linkTo } = require('./helpers')
 
 const demonymSchema = new Schema({
   language: linkTo('Language'),
-  f: {
-    type: 'String',
-  },
-  m: {
-    type: 'String',
-  },
+  country: linkTo('Country'),
+  f: String,
+  m: String,
 })
 
 const Demonym = model('Demonym', demonymSchema)

@@ -1,4 +1,4 @@
-const { Schema } = require('mongoose')
+const { Schema, model } = require('mongoose')
 const { linkTo } = require('./helpers')
 const { nameSchema, imageSchema } = require('./schemas')
 
@@ -26,7 +26,6 @@ const countrySchema = new Schema({
   landlocked: Boolean,
   borders: [String],
   area: Number,
-  demonyms: [linkTo('Demonym')],
   flag: String,
   maps: {
     googleMaps: String,
