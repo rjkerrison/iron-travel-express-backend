@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const Festival = require('../../models/Festivals.model')
+const Festival = require('../../models/Festival.model')
 const festivalJson = require('./festivals.json')
 const Country = require('../../models/Country.model')
 const connection = require('../index')
