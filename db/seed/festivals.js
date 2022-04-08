@@ -5,7 +5,7 @@ const Country = require('../../models/Country.model')
 const connection = require('../index')
 
 const createFestival = async (req, res, next) => {
-    await Festival.deleteMany()
+  await Festival.deleteMany()
   for (const festivalToAdd of festivalJson) {
     const country = await Country.findOne({ cca3: festivalToAdd.cca3 })
     if (country) {
@@ -13,9 +13,9 @@ const createFestival = async (req, res, next) => {
     }
   }
 }
-const perform =()=>{
-    await connection
-    await createFestival()
-    await mongoose.connection.close()
+const perform = async () => {
+  await connection
+  await createFestival()
+  await mongoose.connection.close()
 }
 perform()
