@@ -3,7 +3,7 @@ const Festival = require('../models/Festival.model')
 
 /* GET festival */
 router.get('/', async (req, res, next) => {
-  const festival = await Festival.find().populate('Country')
+  const festival = await Festival.find().populate('country')
 
   res.json(festival)
 })
@@ -12,7 +12,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   let { id } = req.params
 
-  const festival = await Festival.findById(id).populate('Country')
+  const festival = await Festival.findById(id).populate('country')
 
   res.json(festival)
 })
