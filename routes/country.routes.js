@@ -17,7 +17,7 @@ router.get('/:cca3/airports', async (req, res, next) => {
   try {
     const country = await Country.findOne({ cca3 });
     if (country) {
-      const airport = await Airport.find({ countryId: country._id });
+      const airport = await Airport.find({ country: country._id });
       res.json(airport)
     } else {
       throw new Error('Country not found')
