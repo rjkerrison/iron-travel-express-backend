@@ -13,13 +13,8 @@ router.get('/', async (req, res, next) => {
 router.get('/:cca3/landmarks', async (req, res, next) => {
   let { cca3 } = req.params
   cca3 = cca3.toLocaleUpperCase()
-
-  const country = await Country.findOne({ cca3 }).populate(
-    'languages currencies'
-  )
-
-  console.log(country, country.id)
-  const landmark = await Landmark.findOne({country:country.id})
+  console.log('yo', cca3)
+  const landmark = await Landmark.findOne({country:cca3})
 
   console.log(landmark)
 

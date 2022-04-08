@@ -2,9 +2,7 @@ const { model, Schema } = require('mongoose')
 const Country = require('./Country.model')
 
 const landmarkSchema = new Schema({
-  country: {
-    type: Schema.Types.ObjectId, Country
-  },
+  country: String,
   name: String,
   description: String,
   image: String
