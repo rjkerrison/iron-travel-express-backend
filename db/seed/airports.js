@@ -2,25 +2,29 @@ const countries = require('./countries.json')
 const connection = require('../index')
 const { default: mongoose } = require('mongoose')
 const Country = require('../../models/Country.model')
-const Airports = require('../../models/Airports.model')
-
+const Airport = require('../../models/Airport.model')
+const airports = require('./airports.json')
 
 // getCountryId -> take the name and returns the ID
 const getCountryId = async (countryName) => {
-  try {
-    const country = await Country.findOne({ [name.common]: countryName })
-  } catch (error) {
-
-  }
+  const country = await Country
+    .findOne({ $or: [{ 'name.common': countryName }, { 'name.official': countryName }] })
+  return country?._id;
 }
-
 
 const seedAirport = async (airport) => {
   try {
     const countryId = await getCountryId(airport.country);
-    const createdAirport = await Country.findOneAndUpdate()
+    if (countryId) {
+      const createdAirport = await Airport.create({
+        airportCode: airport.code,
+        countryId
+      })
+      console.log(`${airport.country} airport is: `,createdAirport)
+    } else {
+      console.log(`No country for ${airport.country}...`)
 
-    console.log(createdAirport)
+    }
   } catch (error) {
     console.log(error)
   }
@@ -28,9 +32,8 @@ const seedAirport = async (airport) => {
 
 const perform = async () => {
   await connection
-
-  await Promise.all(Airports.map((airport) => seedAirport(airport)))
-
+  await Airport.deleteMany();
+  await Promise.all(airports.map((airport) => seedAirport(airport)))
   await mongoose.connection.close()
 }
 
