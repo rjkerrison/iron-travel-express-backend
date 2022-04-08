@@ -10,6 +10,6 @@ router.get('/', (req, res, next) => {
 
 router.use('/auth', authRoutes)
 router.use('/countries', countryRoutes)
-router.use('/festival', festivalRoutes)
+router.use('/festivals', festivalRoutes)
 
 module.exports = router
