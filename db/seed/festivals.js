@@ -7,7 +7,6 @@ const connection = require('../index')
 const createFestival = async (req, res, next) => {
   await Festival.deleteMany()
   for (const festivalToAdd of festivalJson) {
-    console.log('festivalToAdd.cca3', festivalToAdd.cca3);
     const country = await Country.findOne({ cca3: festivalToAdd.cca3 })
     if (country) {
       await Festival.create({ ...festivalToAdd, country: country._id })
