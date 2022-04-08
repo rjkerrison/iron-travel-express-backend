@@ -20,4 +20,11 @@ router.get('/:cca3', async (req, res, next) => {
   res.json(country)
 })
 
+router.get('/favorited', async (req, res, next) => {
+  let { countryId, userId } = req.params
+  const countryFav = await Country.findOne({ countryId, userId }).populate('country' )
+
+  res.json(countryFav)
+})
+
 module.exports = router
