@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const Country = require('../models/Country.model')
+const Landmark = require('../models/Landmark.model')
 
 /* GET countries */
 router.get('/', async (req, res, next) => {
@@ -9,6 +10,22 @@ router.get('/', async (req, res, next) => {
 })
 
 /* GET single country */
+router.get('/:cca3/landmarks', async (req, res, next) => {
+  let { cca3 } = req.params
+  cca3 = cca3.toLocaleUpperCase()
+
+  const country = await Country.findOne({ cca3 }).populate(
+    'languages currencies'
+  )
+
+  console.log(country, country.id)
+  const landmark = await Landmark.findOne({country:country.id})
+
+  console.log(landmark)
+
+  res.json(landmark)
+})
+
 router.get('/:cca3', async (req, res, next) => {
   let { cca3 } = req.params
   cca3 = cca3.toLocaleUpperCase()

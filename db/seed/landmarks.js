@@ -5,6 +5,8 @@ const { default: mongoose } = require('mongoose')
 const Language = require('../../models/Language.model')
 const Demonym = require('../../models/Demonym.model')
 const Country = require('../../models/Country.model')
+const Landmark = require('../../models/Landmark.model')
+const landmarks = require('./landmarks.json')
 
 
 const getCurrencyId = async ([code, { name, symbol }]) => {
@@ -69,14 +71,19 @@ const seedCountry = async (country) => {
   console.log(createdCountry, demonyms)
 }
 
+const seedLandmarks = async () => {
 
+    const createdLandmark = await Landmark.create(
+        landmarks[0]
+    )
+
+    console.log("created : ", createdLandmark)
+}
 
 const perform = async () => {
   await connection
 
-  await Promise.all(countries.map((country) => seedCountry(country)))
-
-
+  await seedLandmarks()
 
   await mongoose.connection.close()
 }
